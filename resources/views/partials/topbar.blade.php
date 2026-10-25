@@ -5,7 +5,7 @@
         <i class="fa fa-bars"></i>
     </button>
 
-    <h3 class="fw-bold">{{ config('app.name') }}</h3>
+    <h3 class="fw-bold"><a href="{{ url()->previous() }}" class="text-decoration-none fas fa-arrow-left"></a> {{ config('app.name') }}</h3>
     <ul class="navbar-nav ml-auto">
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->

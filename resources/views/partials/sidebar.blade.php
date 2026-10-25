@@ -36,8 +36,8 @@
      <!-- Nav Item - Tables -->
      <li class="nav-item">
          <a class="nav-link py-2" href="tables.html">
-             <i class="fas fa-fw fa-table"></i>
-             <span>Tables</span></a>
+             <i class="fas fa-fw fa-book"></i>
+             <span>Buku</span></a>
      </li>
 
      <!-- Divider -->

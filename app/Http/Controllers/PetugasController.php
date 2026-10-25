@@ -36,7 +36,7 @@ class PetugasController extends Controller
         ]);
 
         $petugasNew = Petugas::create($validated);
-        return redirect()->route('petugas.index')->with('success', $petugasNew);
+        return redirect()->route('petugas.index')->with('success', "Berhasil menambahkan petugas $petugasNew->nama_petugas");
     }
 
     /**
@@ -50,17 +50,24 @@ class PetugasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Petugas $petugas)
+    public function edit(Petugas $petuga)
     {
-        //
+        return view('petugas.edit', compact('petuga'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Petugas $petugas)
+    public function update(Request $request, Petugas $petuga)
     {
-        //
+        $validated = $request->validate([
+            'nama_petugas' => ['required', 'string', 'max:100'],
+            'jabatan' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'max:50', 'unique:petugas,username'],
+        ]);
+
+        $petuga->update($validated);
+        return redirect()->route('petugas.index')->with('success', 'Berhasil mengupdate data');
     }
 
     /**
