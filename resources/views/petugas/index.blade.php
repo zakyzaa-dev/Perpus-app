@@ -55,6 +55,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-4">
+                {{ $petugass->links() }}
+            </div>
         </div>
     </div>
 

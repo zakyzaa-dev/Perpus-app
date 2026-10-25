@@ -12,7 +12,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $petugass = Petugas::all();
+        $petugass = Petugas::latest()->paginate(10);
         return view('petugas.index', compact('petugass'));
     }
 
@@ -67,7 +67,7 @@ class PetugasController extends Controller
         ]);
 
         $petuga->update($validated);
-        return redirect()->route('petugas.index')->with('success', 'Berhasil mengupdate data');
+        return redirect()->route('petugas.index')->with('success', "Berhasil mengupdate data petugas $petuga->nama_petugas");
     }
 
     /**

@@ -35,7 +35,7 @@
 
      <!-- Nav Item - Tables -->
      <li class="nav-item">
-         <a class="nav-link py-2" href="tables.html">
+         <a class="nav-link py-2" href="{{ route('buku.index') }}">
              <i class="fas fa-fw fa-book"></i>
              <span>Buku</span></a>
      </li>

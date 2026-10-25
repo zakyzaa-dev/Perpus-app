@@ -12,7 +12,8 @@ class BukuController extends Controller
      */
     public function index()
     {
-        //
+        $bukus = Buku::latest()->paginate(10);
+        return view('buku.index', compact('bukus'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BukuController extends Controller
      */
     public function create()
     {
-        //
+        return view('buku.create');
     }
 
     /**
@@ -28,7 +29,15 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'judul_buku' => ['required', 'string', 'max:150'],
+            'penulis' => ['required', 'string', 'max:100'],
+            'kode_buku' => ['required', 'string', 'max:20', 'unique:buku,kode_buku'],
+            'stok' => ['required', 'numeric', 'min:1'],
+        ]);
+
+        $bukuNew = Buku::create($validated);
+        return redirect()->route('buku.index')->with('success', "Berhasil menambah data buku $bukuNew->judul_buku");
     }
 
     /**
@@ -44,7 +53,7 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku)
     {
-        //
+        return view('buku.edit', compact('buku'));
     }
 
     /**
@@ -52,7 +61,16 @@ class BukuController extends Controller
      */
     public function update(Request $request, Buku $buku)
     {
-        //
+        $validated = $request->validate([
+            'judul_buku' => ['required', 'string', 'max:150'],
+            'penulis' => ['required', 'string', 'max:100'],
+            'kode_buku' => ['required', 'string', 'max:20', 'unique:buku,kode_buku,' . $buku->id_buku],
+            'stok' => ['required', 'numeric', 'min:1'],
+        ]);
+
+        $buku->update($validated);
+
+        return redirect()->route('buku.index')->with('success', "Berhasil mengedit data buku $buku->judul_buku");
     }
 
     /**
@@ -60,6 +78,7 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        //
+        $buku->delete();
+        return back()->with('success', "Berhasil menghapus data buku $buku->judul_buku");
     }
 }
