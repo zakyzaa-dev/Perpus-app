@@ -21,7 +21,7 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        //
+        return view('petugas.create');
     }
 
     /**
@@ -29,7 +29,14 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_petugas' => ['required', 'string', 'max:100'],
+            'jabatan' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'max:50', 'unique:petugas,username'],
+        ]);
+
+        $petugasNew = Petugas::create($validated);
+        return redirect()->route('petugas.index')->with('success', $petugasNew);
     }
 
     /**
@@ -59,8 +66,9 @@ class PetugasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Petugas $petugas)
+    public function destroy(Petugas $petuga)
     {
-        //
+        $petuga->delete();
+        return back()->with('success', "Berhasil menghapus petugas $petuga->nama_petugas");
     }
 }
