@@ -15,50 +15,7 @@
             </a>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama Petugas</th>
-                        <th>Username</th>
-                        <th>Jabatan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($petugass as $item)
-                        <tr>
-                            <td>{{ $item->id_petugas }}</td>
-                            <td>{{ $item->nama_petugas }}</td>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->jabatan }}</td>
-                            <td>
-                                <div class="d-flex">
-                                    {{-- EDIT BUTTON --}}
-                                    <a href="{{ route('petugas.edit', $item->id_petugas) }}"
-                                        class="btn-warning btn mr-2">Edit</a>
-
-                                    {{-- DELETE BUTTON --}}
-                                    <form action="{{ route('petugas.destroy', $item->id_petugas) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-danger btn mr-2"
-                                            onclick="return confirm('Yakin ingin menghapus petugas {{ $item->nama_petugas }}?')">Delete</button>
-                                    </form>
-                                </div>
-
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-muted text-center">Belum ada data petugas!</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <div class="mt-4">
-                {{ $petugass->links() }}
-            </div>
+            @livewire('petugas-search')
         </div>
     </div>
 
