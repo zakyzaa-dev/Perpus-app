@@ -42,7 +42,8 @@
                                     <form action="{{ route('petugas.destroy', $item->id_petugas) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn-danger btn mr-2" onclick="return confirm('Yakin ingin menghapus petugas {{ $item->nama_petugas }}?')">Delete</button>
+                                        <button type="submit" class="btn-danger btn mr-2"
+                                            onclick="return confirm('Yakin ingin menghapus petugas {{ $item->nama_petugas }}?')">Delete</button>
                                     </form>
                                 </div>
 
@@ -50,7 +51,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-muted text-center">Belum ada data petugas!</td>
+                            <td colspan="5" class="text-muted text-center">Belum ada data petugas!</td>
                         </tr>
                     @endforelse
                 </tbody>
