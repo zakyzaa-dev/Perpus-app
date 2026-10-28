@@ -1,6 +1,6 @@
 <x-layouts.app title="Buku">
     <h3 class="mt-3 text-dark mb-1">Daftar Buku</h3>
-    <p class="text-muted small">Kelola data buku Perpustakaan Widya Aksara.</p>
+    <p class="text-muted small">Kelola data buku perpustakaan Widya Aksara.</p>
 
     @if (session('success'))
         <div class="alert alert-success">

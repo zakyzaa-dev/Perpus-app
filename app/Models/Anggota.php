@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Anggota extends Model
 {
     protected $primaryKey = 'id_anggota';
-    protected $table = 'petugas';
+    protected $table = 'anggota';
 
     public function peminjamans(): HasMany
     {
