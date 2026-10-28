@@ -12,7 +12,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        //
+        return view('anggota.index');
     }
 
     /**
@@ -60,6 +60,7 @@ class AnggotaController extends Controller
      */
     public function destroy(Anggota $anggota)
     {
-        //
+        $anggota->delete();
+        return back()->with('success', "Berhasil menghapus data anggota $anggota->nama_anggota");
     }
 }

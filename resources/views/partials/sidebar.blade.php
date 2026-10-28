@@ -33,6 +33,13 @@
              <span>Petugas</span></a>
      </li>
 
+     {{-- ANGGOTA --}}
+     <li class="nav-item">
+         <a class="nav-link py-2" href="{{ route('anggota.index') }}">
+             <i class="fas fa-fw fa-users"></i>
+             <span>Anggota</span></a>
+     </li>
+
      <!-- Nav Item - Tables -->
      <li class="nav-item">
          <a class="nav-link py-2" href="{{ route('buku.index') }}">
