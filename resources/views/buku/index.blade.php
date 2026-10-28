@@ -15,7 +15,7 @@
             </a>
         </div>
         <div class="card-body">
-            @livewire('buku-search')
+            <livewire:buku-search />
         </div>
     </div>
 

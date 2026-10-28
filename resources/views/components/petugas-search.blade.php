@@ -20,13 +20,16 @@ new class extends Component {
     public function render()
     {
         // Eksekusi query pencarian berdasarkan input user
-        $daftarPetugas = Petugas::where('nama_petugas', 'like', '%' . $this->search . '%')
-            ->orWhere('username', 'like', '%' . $this->search . '%')
-            ->orWhere('jabatan', 'like', '%' . $this->search . '%')
+        $daftarPetugas = Petugas::query()
+            ->when($this->search, function ($query){
+                $query->where('nama_petugas', 'like', '%' . $this->search . '%')
+                    ->orWhere('username', 'like', '%' . $this->search . '%')
+                    ->orWhere('jabatan', 'like', '%' . $this->search . '%');
+            })
             ->latest()
             ->paginate(10);
 
-        return view('components.petugas-search', [
+        return $this->view([
             'petugass' => $daftarPetugas,
         ]);
     }

@@ -17,11 +17,14 @@ new class extends Component {
 
     public function render()
     {
-        $allBuku = Buku::where('judul_buku', 'like', '%' . $this->search . '%')
+        $allBuku = Buku::query()
+            ->when($this->search, function ($query) {
+                $query->where('judul_buku', 'like', '%' . $this->search . '%');
+            })
             ->latest()
             ->paginate(10);
 
-        return view('components.buku-search', [
+        return $this->view([
             'bukus' => $allBuku,
         ]);
     }
@@ -59,7 +62,7 @@ new class extends Component {
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn-danger btn mr-2"
-                                    onclick="return confirm('Yakin ingin menghapus petugas {{ $item->nama_petugas }}?')">Delete</button>
+                                    onclick="return confirm('Yakin ingin menghapus buku {{ $item->judul_buku }}?')">Delete</button>
                             </form>
                         </div>
 
