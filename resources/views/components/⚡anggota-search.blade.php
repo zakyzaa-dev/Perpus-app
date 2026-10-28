@@ -19,7 +19,10 @@ new class extends Component {
     {
         $allAnggota = Anggota::query()
             ->when($this->search, function ($query) {
-                $query->where('nisn', 'like', '%' . $this->search . '%')->orWhere('nama_anggota', 'like', '%' . $this->search . '%');
+                $query
+                    ->where('nisn', 'like', '%' . $this->search . '%')
+                    ->orWhere('nama_anggota', 'like', '%' . $this->search . '%')
+                    ->orWhere('kelas', 'like', '%' . $this->search . '%');
             })
             ->latest()
             ->paginate(10);
@@ -33,7 +36,7 @@ new class extends Component {
 
 <div>
     <input type="text" name="search" id="search" wire:model.live.debounce.300ms="search" class="form-control mb-4"
-        placeholder="Cari berdasarkan NISN siswa ataupun nama....">
+        placeholder="Cari berdasarkan NISN siswa, Kelas ataupun Nama Siswa....">
 
     <table class="table-striped table-bordered table">
         <thead>
