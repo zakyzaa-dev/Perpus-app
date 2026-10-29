@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app title="Anggota">
     <h3 class="mt-3 text-dark mb-1">Daftar Anggota</h3>
     <p class="text-muted small">Kelola data anggota perpustakaan Widya Aksara</p>
 

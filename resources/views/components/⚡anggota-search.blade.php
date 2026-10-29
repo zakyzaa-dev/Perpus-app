@@ -66,7 +66,8 @@ new class extends Component {
                             <form action="{{ route('anggota.destroy', $item->id_anggota) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-danger btn mr-2">Delete</button>
+                                <button type="submit" class="btn-danger btn mr-2"
+                                    onclick="return confirm('Yakin ingin menghapus anggota {{ $item->nama_anggota }}')">Delete</button>
                             </form>
                         </div>
                     </td>
@@ -78,4 +79,7 @@ new class extends Component {
             @endforelse
         </tbody>
     </table>
+    <div class="mt-4">
+        {{ $anggotas->links() }}
+    </div>
 </div>

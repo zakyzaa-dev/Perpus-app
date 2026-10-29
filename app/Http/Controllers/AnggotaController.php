@@ -28,7 +28,16 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nisn' => ['string', 'max:10', 'required'],
+            'nama_anggota' => ['string', 'max:100', 'required'],
+            'jenis_kelamin' => ['in:L,P', 'required'],
+            'kelas' => ['max:20', 'required', 'string']
+        ]);
+
+        $anggotaNew = Anggota::create($validated);
+
+        return redirect()->route('anggota.index')->with('success', "Berhasil menambah data anggota $anggotaNew->nama_anggota");
     }
 
     /**
@@ -44,7 +53,7 @@ class AnggotaController extends Controller
      */
     public function edit(Anggota $anggota)
     {
-        //
+        return view('anggota.edit', compact('anggota'));
     }
 
     /**
@@ -52,7 +61,16 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, Anggota $anggota)
     {
-        //
+        $validated = $request->validate([
+            'nisn' => ['string', 'max:10', 'required'],
+            'nama_anggota' => ['string', 'max:100', 'required'],
+            'jenis_kelamin' => ['in:L,P', 'required'],
+            'kelas' => ['max:20', 'required', 'string']
+        ]);
+
+        $anggota->update($validated);
+
+        return redirect()->route('anggota.index')->with('success', "Berhasil mengedit data anggota $anggota->nama_anggota");
     }
 
     /**

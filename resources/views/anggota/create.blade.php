@@ -16,22 +16,23 @@
                             <label for="nama_anggota" class="form-label">Nama</label>
                             <input type="text" name="nama_anggota" id="nama_anggota"
                                 class="form-control @error('nama_anggota') is-invalid @enderror"
-                                placeholder="Hanni Pham" minlength="1" maxlength="100" required>
+                                placeholder="Hanni Pham" minlength="1" maxlength="100" required
+                                value="{{ old('nama_anggota') }}">
+                            @error('nama_anggota')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('nama_anggota')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="mb-3">
                             <label for="nisn" class="form-label">NISN</label>
-                            <input type="text" name="nisn" id="nisn"
+                            <input type="numeric" name="nisn" id="nisn"
                                 class="form-control @error('nisn') is-invalid @enderror" placeholder="0089717778"
-                                minlength="10" maxlength="10" required>
+                                minlength="10" maxlength="10" required value="{{ old('nisn') }}">
+                            @error('nisn')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('nisn')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                 </div>
 
@@ -41,11 +42,11 @@
                             <label for="kelas" class="form-label">Kelas</label>
                             <input type="text" name="kelas" id="kelas"
                                 class="form-control @error('kelas') is-invalid @enderror" placeholder="XII PPLG 3"
-                                minlength="1" maxlength="20" required>
+                                minlength="1" maxlength="20" required value="{{ old('kelas') }}">
+                            @error('kelas')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('kelas')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="mb-3">
@@ -61,7 +62,7 @@
                             {{-- PEREMPUAN --}}
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="jenis_kelamin" id="radioDefault2"
-                                    value="P" checked>
+                                    value="P">
                                 <label class="form-check-label" for="radioDefault2">
                                     Perempuan
                                 </label>
