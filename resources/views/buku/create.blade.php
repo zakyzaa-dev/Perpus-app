@@ -23,15 +23,23 @@
                 {{-- INPUT Judul Buku BANG INI CEUNAHH --}}
                 <div class="mb-3">
                     <label for="judul_buku" class="form-label mb-1">Judul Buku</label>
-                    <input type="text" name="judul_buku" id="judul_buku" class="form-control"
-                        placeholder="Solanin" value="{{ old('judul_buku') }}" maxlength="150">
+                    <input type="text" name="judul_buku" id="judul_buku"
+                        class="form-control @error('judul_buku') is-invalid @enderror" placeholder="Solanin"
+                        value="{{ old('judul_buku') }}" maxlength="150">
+                    @error('judul_buku')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 {{-- INPUT Penulis BANG INI CEUNAHH --}}
                 <div class="mb-3">
                     <label for="penulis" class="form-label mb-1">Penulis</label>
-                    <input type="text" name="penulis" id="penulis" class="form-control"
-                        placeholder="Inio ASANO" value="{{ old('penulis') }}" maxlength="100">
+                    <input type="text" name="penulis" id="penulis"
+                        class="form-control @error('penulis') is-invalid @enderror" placeholder="Inio ASANO"
+                        value="{{ old('penulis') }}" maxlength="100">
+                    @error('penulis')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 {{-- INPUT USERNAME SAMS JABATAN --}}
@@ -39,13 +47,17 @@
                     <div class="row">
                         <div class="col-md-6 col-12 mb-3">
                             <label for="kode_buku" class="form-label mb-1">Kode Buku</label>
-                            <input type="text" name="kode_buku" id="kode_buku" class="form-control"
-                                placeholder="BK-001" value="{{ old('kode_buku') }}" maxlength="20">
+                            <input type="text" name="kode_buku" id="kode_buku"
+                                class="form-control @error('kode_buku') is-invalid @enderror" placeholder="BK-001"
+                                value="{{ old('kode_buku') }}" maxlength="20">
+                            @error('kode_buku')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6 col-12 mb-3">
                             <label for="stok" class="form-label mb-1">Stok</label>
-                            <input type="number" name="stok" id="stok" class="form-control"
-                                placeholder="67" value="{{ old('stok') }}" min="1">
+                            <input type="number" name="stok" id="stok" class="form-control" placeholder="67"
+                                value="{{ old('stok') }}" min="1">
                         </div>
                     </div>
                 </div>

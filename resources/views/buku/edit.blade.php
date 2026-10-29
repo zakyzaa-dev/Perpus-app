@@ -2,16 +2,6 @@
     <h3 class="mt-3 text-dark mb-1">Edit Buku</h3>
     <p class="text-muted small">Mengedit data buku baru untuk Perpustakaan Widya Aksara.</p>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $item)
-                    <li>{{ $item }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="card">
         <div class="card-header py-3">
             <h6 class="m-0 text-primary fw-bold">Form Edit Buku</h6>
@@ -24,15 +14,23 @@
                 {{-- INPUT Judul Buku BANG INI CEUNAHH --}}
                 <div class="mb-3">
                     <label for="judul_buku" class="form-label mb-1">Judul Buku</label>
-                    <input type="text" name="judul_buku" id="judul_buku" class="form-control"
-                        placeholder="Solanin" value="{{ old('judul_buku', $buku->judul_buku) }}" maxlength="150">
+                    <input type="text" name="judul_buku" id="judul_buku"
+                        class="form-control @error('judul_buku') is-invalid @enderror" placeholder="Solanin"
+                        value="{{ old('judul_buku', $buku->judul_buku) }}" maxlength="150">
+                    @error('judul_buku')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 {{-- INPUT Penulis BANG INI CEUNAHH --}}
                 <div class="mb-3">
                     <label for="penulis" class="form-label mb-1">Penulis</label>
-                    <input type="text" name="penulis" id="penulis" class="form-control"
-                        placeholder="Inio ASANO" value="{{ old('penulis', $buku->penulis) }}" maxlength="100">
+                    <input type="text" name="penulis" id="penulis"
+                        class="form-control @error('penulis') is-invalid @enderror" placeholder="Inio ASANO"
+                        value="{{ old('penulis', $buku->penulis) }}" maxlength="100">
+                    @error('penulis')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 {{-- INPUT Kode Buku SAMS stok --}}
@@ -40,13 +38,21 @@
                     <div class="row">
                         <div class="col-md-6 col-12 mb-3">
                             <label for="kode_buku" class="form-label mb-1">Kode Buku</label>
-                            <input type="text" name="kode_buku" id="kode_buku" class="form-control"
-                                placeholder="BK-001" value="{{ old('kode_buku', $buku->kode_buku) }}" maxlength="20">
+                            <input type="text" name="kode_buku" id="kode_buku"
+                                class="form-control @error('kode_buku') is-invalid @enderror" placeholder="BK-001"
+                                value="{{ old('kode_buku', $buku->kode_buku) }}" maxlength="20">
+                            @error('kode_buku')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6 col-12 mb-3">
                             <label for="stok" class="form-label mb-1">Stok</label>
-                            <input type="number" name="stok" id="stok" class="form-control"
-                                placeholder="67" value="{{ old('stok', $buku->stok) }}" min="1">
+                            <input type="number" name="stok" id="stok"
+                                class="form-control @error('stok') is-invalid @enderror" placeholder="67"
+                                value="{{ old('stok', $buku->stok) }}" min="1">
+                            @error('stok')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>

@@ -2,16 +2,6 @@
     <h3 class="mt-3 mb-1 text-dark">Tambah Anggota</h3>
     <p class="text-muted small">Menambahkan data anggota baru</p>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $err)
-                    <li>{{ $err }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="card">
         <div class="card-header py-3">
             <h6 class="m-0 text-primary fw-bold">Form Tambah Anggota</h6>
