@@ -68,4 +68,7 @@ new class extends Component {
             @endforelse
         </tbody>
     </table>
+    <div class="mt-4">
+        {{ $peminjamans->links() }}
+    </div>
 </div>

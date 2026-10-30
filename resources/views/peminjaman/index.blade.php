@@ -10,7 +10,7 @@
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="text-primary m0 font-weight-bold">Data Peminjaman</h6>
             <a href="{{ route('peminjaman.create') }}" class="btn-primary btn btn-sm">
-                <i class="fas fa-plus fa-sm"></i> Tambah Buku
+                <i class="fas fa-plus fa-sm"></i> Tambah Peminjaman
             </a>
         </div>
         <div class="card-body">
