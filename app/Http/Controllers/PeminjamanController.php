@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggota;
+use App\Models\Buku;
 use App\Models\Peminjaman;
+use App\Models\Petugas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -20,7 +24,11 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        $members = Anggota::all();
+        $books = Buku::all();
+        $officers = Petugas::all();
+
+        return view('peminjaman.create', compact('members', 'books', 'officers'));
     }
 
     /**
@@ -28,7 +36,19 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'id_buku' => ['required', 'numeric', 'exists:buku,id_buku'],
+            'id_anggota' => ['required', 'numeric', 'exists:anggota,id_anggota'],
+            'id_petugas' => ['required', 'numeric', 'exists:petugas,id_petugas'],
+            'tanggal_pinjam' => ['required', 'date'],
+            'tanggal_harus_kembali' => ['required', 'date', 'after_or_equal:tanggal_pinjam'],
+        ]);
+
+        $peminjamanNew = Peminjaman::create($validated);
+        $lamaPinjam = Carbon::parse($validated['tanggal_pinjam'])->diffInDays($validated['tanggal_harus_kembali']);
+
+
+        return redirect()->route('peminjaman.index')->with('success', ($peminjamanNew->anggota?->nama_anggota ?? '-') . " Berhasil meminjam buku " . ($peminjamanNew->buku?->judul_buku ?? '-') . " selama $lamaPinjam hari");
     }
 
     /**

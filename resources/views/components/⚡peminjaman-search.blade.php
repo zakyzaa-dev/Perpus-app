@@ -18,12 +18,13 @@ new class extends Component {
     public function render()
     {
         $peminjamans = Peminjaman::query()
+            ->with(['petugas', 'anggota', 'buku'])
             ->when($this->search, function ($query) {
                 $search = $this->search;
                 $query->where(function ($q) use ($search) {
                     $q->whereHas('anggota', function ($subQuery) use ($search) {
                         $subQuery->where('nama_anggota', 'like', "%{$search}%");
-                    });
+                    })->orWhere('status', 'like', "%{$search}%");
                 });
             })
             ->latest()
@@ -38,16 +39,18 @@ new class extends Component {
 
 <div>
     <input type="text" wire:model.live.debounce.300.ms="search" name="search" id="search" class="form-control mb-3"
-        placeholder="Cara data peminjaman berdasarkan nama peminjam...">
+        placeholder="Cara data peminjaman berdasarkan nama peminjam dan status peminjaman...">
 
     <table class="table-striped table-bordered table">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nama Petugas</th>
                 <th>Nama Peminjam</th>
                 <th>Judul Buku</th>
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
+                <th>Lama Peminjaman</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -55,10 +58,13 @@ new class extends Component {
             @forelse ($peminjamans as $item)
                 <tr>
                     <td>{{ $item->id_peminjaman }}</td>
+                    <td>{{ $item->petugas?->nama_petugas ?? 'Tidak ada nama' }} ({{ $item->petugas?->username ?? '-' }})
+                    </td>
                     <td>{{ $item->anggota?->nama_anggota ?? 'Tidak ada nama' }}</td>
                     <td>{{ $item->buku?->judul_buku ?? 'Tidak ada judul' }}</td>
                     <td>{{ $item->tanggal_pinjam?->format('d F Y') ?? '-' }}</td>
                     <td>{{ $item->tanggal_harus_kembali?->format('d F Y') ?? '-' }}</td>
+                    <td>{{ $item->tanggal_pinjam->diffInDays($item->tanggal_harus_kembali) }} Hari</td>
                     <td>{{ $item->status }}</td>
                 </tr>
             @empty
