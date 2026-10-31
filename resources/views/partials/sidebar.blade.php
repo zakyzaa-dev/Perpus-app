@@ -53,6 +53,12 @@
              <span>Peminjaman</span></a>
      </li>
 
+     <li class="nav-item">
+         <a class="nav-link py-2" href="{{ route('pengembalian.index') }}">
+             <i class="fas fa-fw fa-exchange-alt"></i>
+             <span>Pengembalian</span></a>
+     </li>
+
      <!-- Divider -->
      <hr class="sidebar-divider d-none d-md-block">
 

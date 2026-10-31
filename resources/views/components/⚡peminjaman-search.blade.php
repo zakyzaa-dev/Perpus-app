@@ -65,11 +65,14 @@ new class extends Component {
                     <td>{{ $item->tanggal_pinjam?->format('d F Y') ?? '-' }}</td>
                     <td>{{ $item->tanggal_harus_kembali?->format('d F Y') ?? '-' }}</td>
                     <td>{{ $item->tanggal_pinjam->diffInDays($item->tanggal_harus_kembali) }} Hari</td>
-                    <td>{{ $item->status }}</td>
+                    <td class="{{ $item->status == 'Dipinjam' ? 'text-warning' : 'text-success' }}">{{ $item->status }}
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td class="text-muted text-center" colspan="7">Belum ada data peminjaman!</td>
+                    <td class="text-muted
+                        text-center" colspan="8">Belum ada data peminjaman!
+                    </td>
                 </tr>
             @endforelse
         </tbody>

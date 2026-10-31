@@ -12,7 +12,10 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        //
+        $pengembalians = Pengembalian::with(['peminjaman.anggota', 'peminjaman.buku'])
+            ->latest()
+            ->paginate(10);
+        return view('pengembalian.index', compact('pengembalians'));
     }
 
     /**
